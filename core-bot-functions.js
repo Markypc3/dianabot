@@ -60,7 +60,7 @@ module.exports = function(bot, taID) {
 				// help message
 				bot.sendMessage(message.channel, "All commands work only when you specifically mention me. Type `queue me` or `q me` to queue yourself and `status` to check current queue. Type `remove me` to remove yourself.")
 
-			} else if (message.text.indexOf("clear queue") > -1 && message.user === taID) {
+			} else if ((message.text.indexOf("clear queue") > -1 || message.text.indexOf("clear q") > -1) && message.user === taID) {
 				queue = [];
 				bot.sendMessage(message.channel, "Queue cleared");
 				backup(queue);

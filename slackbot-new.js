@@ -3,7 +3,7 @@ var async = require('async'),
     querystring = require('querystring'),
     ws = require('ws');
 
-function slackbot(token) { 
+function slackbot(token) {
     this.token = token;
     this.handlers = [];
     this.messageID = 0;
@@ -51,7 +51,7 @@ slackbot.prototype.api = function(method, params, cb) {
       }
     });
   });
-  
+
   req.on('error', function(error) {
     if (cb != null) {
       return cb({
@@ -60,7 +60,7 @@ slackbot.prototype.api = function(method, params, cb) {
       });
     }
   });
-  
+
   req.write(post_data);
   return req.end();
 };
@@ -97,9 +97,10 @@ slackbot.prototype.connect = function() {
       self.ws = new ws(data.url);
       self.ws.on('message', function(data, flags) {
         var message = JSON.parse(data);
+        // console.log(data);
         self.handle(message);
       });
-    });    
+    });
 };
 
 module.exports = slackbot;

@@ -19,7 +19,7 @@ var prettyQueue = function() {
 	});
 	return "Current queue is now: " + (queueArray.length ? queueArray.join(", ") : "empty");
 };
-module.exports = function(bot, taID) {
+module.exports = function(bot, taID, taID_two) {
 	var dianabot = function(message, cb) {
 		// the if/else if statements are for commands that don't rely
 		// on the wording as much
@@ -48,7 +48,7 @@ module.exports = function(bot, taID) {
 					backup(queue);
 				}
 
-			} else if (message.text.indexOf("next") > -1 && message.user === taID) {
+			} else if (message.text.indexOf("next") > -1 && (message.user === taID || message.user === taID_two)) {
 				// next student
 				var currentStudent = queue.shift();
 				if (currentStudent) {
@@ -60,7 +60,7 @@ module.exports = function(bot, taID) {
 				// help message
 				bot.sendMessage(message.channel, "All commands work only when you specifically mention me. Type `queue me` or `q me` to queue yourself and `status` to check current queue. Type `remove me` to remove yourself.")
 
-			} else if ((message.text.indexOf("clear queue") > -1 || message.text.indexOf("clear q") > -1) && message.user === taID) {
+			} else if ((message.text.indexOf("clear queue") > -1 || message.text.indexOf("clear q") > -1) && (message.user === taID || message.user === taID_two)) {
 				queue = [];
 				bot.sendMessage(message.channel, "Queue cleared");
 				backup(queue);

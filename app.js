@@ -7,10 +7,11 @@ var xmlParser = new xml2js.Parser();
 
 var botKey = process.env.SLACK_BOT_KEY;
 var taID = process.env.SLACK_USER_ID;
+var taID_two = process.env.SLACK_USER_ID_TWO;
 
 var bot = new slackbot(botKey);
 
-var dianabot = require('./core-bot-functions')(bot, taID);
+var dianabot = require('./core-bot-functions')(bot, taID, taID_two);
 var easterEggs = require('./easter-eggs')(bot, taID);
 
 bot.use(dianabot);
